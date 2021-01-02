@@ -2,7 +2,7 @@ import 'full_note_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../models/tip.dart';
+import '../models/house_object.dart';
 
 class TipRow extends StatelessWidget {
   final Tip tip;

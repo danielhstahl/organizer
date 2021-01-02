@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'repositories/firebase.dart';
-import 'repositories/tips.dart';
-import 'blocs/tips.dart';
-import 'state/tip_state.dart';
-import 'components/tip_row.dart';
+import 'blocs/house_objects/house_object_bloc.dart';
+import 'blocs/house_objects/house_object_state.dart';
+import 'components/house_object_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -19,11 +18,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RepositoryProvider<TipRepository>(
-        create: (context) => TipRepositoryFirestore()..refresh(),
+      home: RepositoryProvider<HouseObjectRepository>(
+        create: (context) => HouseObjectRepositoryFirestore()..refresh(),
         child: BlocProvider(
             create: (context) =>
-                TipBloc(repository: RepositoryProvider.of(context)),
+                HouseObjectBloc(repository: RepositoryProvider.of(context)),
             child: MyHomePage(title: 'Flutter Demo Home Page')),
       ),
     );
@@ -40,7 +39,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TipBloc bloc;
+  HouseObjectBloc bloc;
 
   @override
   void initState() {
@@ -61,11 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: BlocBuilder<TipBloc, TipState>(
+        child: BlocBuilder<HouseObjectBloc, HouseObjectState>(
           builder: (context, data) {
-            if (data is TipLoadingState) {
+            if (data is HouseObjectLoading) {
               return CircularProgressIndicator();
-            } else if (data is TipHasDataState) {
+            } else if (data is HouseObjectData) {
               return ListView(
                   children: data.data
                       .map((item) => TipRow(

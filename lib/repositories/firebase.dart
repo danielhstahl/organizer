@@ -1,12 +1,17 @@
-import 'tips.dart';
-import '../models/tip.dart';
+import '../models/house_object.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
-class TipRepositoryFirestore extends TipRepository {
-  final _loadedData = StreamController<List<Tip>>();
+abstract class HouseObjectRepository {
+  Stream<List<HouseObject>> objects();
+  void dispose();
+  void refresh();
+}
 
-  final List<Tip> _cache = [];
+class HouseObjectRepositoryFirestore extends HouseObjectRepository {
+  final _loadedData = StreamController<List<HouseObject>>();
+
+  final List<HouseObject> _cache = [];
 
   @override
   void dispose() {
@@ -23,8 +28,7 @@ class TipRepositoryFirestore extends TipRepository {
         _cache.clear();
         techniques.docs.forEach((tip) {
           final doc = tip.data();
-          _cache.add(
-              Tip(doc["tipName"], doc["shortTipText"], doc["fullTipText"]));
+          _cache.add(HouseObject(doc["objectLabel"], doc["objectLocation"]));
         });
 
         _loadedData.add(_cache);
@@ -33,5 +37,5 @@ class TipRepositoryFirestore extends TipRepository {
   }
 
   @override
-  Stream<List<Tip>> tips() => _loadedData.stream;
+  Stream<List<HouseObject>> objects() => _loadedData.stream;
 }

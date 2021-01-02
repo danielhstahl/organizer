@@ -1,4 +1,4 @@
-import '../models/tip.dart';
+import '../models/house_object.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
