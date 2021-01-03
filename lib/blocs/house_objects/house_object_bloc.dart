@@ -2,7 +2,7 @@ import 'package:organizer/models/house_object.dart';
 
 import 'house_object_events.dart';
 import 'house_object_state.dart';
-import '../../repositories/firebase.dart';
+import '../../services/firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +23,7 @@ class HouseObjectBloc extends Bloc<HouseObjectEvent, HouseObjectState> {
   }
 
   @override
-  Future<Function> close() {
+  Future<void> close() {
     repository.dispose();
     return super.close();
   }

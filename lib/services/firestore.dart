@@ -22,12 +22,12 @@ class HouseObjectRepositoryFirestore extends HouseObjectRepository {
   void refresh() {
     if (FirebaseFirestore.instance != null) {
       FirebaseFirestore.instance
-          .collection('tips')
+          .collection('house_objects')
           .snapshots()
           .listen((techniques) {
         _cache.clear();
-        techniques.docs.forEach((tip) {
-          final doc = tip.data();
+        techniques.docs.forEach((houseObject) {
+          final doc = houseObject.data();
           _cache.add(HouseObject(doc["objectLabel"], doc["objectLocation"]));
         });
 

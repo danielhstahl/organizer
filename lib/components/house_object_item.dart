@@ -11,29 +11,9 @@ class HouseObjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.blueAccent),
-          borderRadius: BorderRadius.circular(16)),
-      child: InkWell(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => FullNoteScreen(
-                  tip: tip,
-                ))),
-        splashColor: Theme.of(context).accentColor,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          child: ListTile(
-            leading: Icon(Icons.description),
-            title: Text(
-              tip.tipName,
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            subtitle: Text(tip.shortTipText),
-            trailing: Icon(Icons.navigate_next),
-          ),
-        ),
-      ),
+    return ListTile(
+      title: Text(houseObject.objectLabel),
+      subtitle: Text(houseObject.objectLocation),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'repositories/firebase.dart';
+import 'services/firestore.dart';
 import 'blocs/house_objects/house_object_bloc.dart';
 import 'blocs/house_objects/house_object_state.dart';
-import 'components/house_object_item.dart';
+import 'components/house_object_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -65,14 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
             if (data is HouseObjectLoading) {
               return CircularProgressIndicator();
             } else if (data is HouseObjectData) {
-              return ListView(
-                  children: data.data
-                      .map((item) => TipRow(
-                            tip: item,
-                          ))
-                      .toList());
+              return HouseObjectList(houseObjects: data.data);
             } else {
-              return Container();
+              return Text("Should never get here");
             }
           },
         ),
