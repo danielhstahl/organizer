@@ -12,6 +12,7 @@ class HouseObjectList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+        shrinkWrap: true,
         children: houseObjects
             .map((item) => HouseObjectItem(houseObject: item))
             .toList());
