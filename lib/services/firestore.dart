@@ -16,17 +16,19 @@ class HouseObjectRepositoryFirestore extends HouseObjectRepository {
 
   @override
   Future<void> addNewObject(HouseObject object) {
-    houseObjectConnection.add(object.toEntity().toDocument());
+    return houseObjectConnection.add(object.toEntity().toDocument());
   }
 
   @override
   Future<void> deleteObject(HouseObject object) {
-    houseObjectConnection.doc(object.id).delete();
+    return houseObjectConnection.doc(object.id).delete();
   }
 
   @override
   Future<void> updateObject(HouseObject object) {
-    houseObjectConnection.doc(object.id).update(object.toEntity().toDocument());
+    return houseObjectConnection
+        .doc(object.id)
+        .update(object.toEntity().toDocument());
   }
 
   @override
